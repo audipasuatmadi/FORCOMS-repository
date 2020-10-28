@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FORCOMS</string>
+    <string name="description_forcoms_definition">FORCOMS merupakan sebuah aplikasi forum berbasis Android yang dimana, anda sebagai pengguna dapat bertanya dan juga dapat memecahkan suatu masalah dalam lingkup ranah Ilmu Komputer. Besar harapan kami agar FORCOMS ini dapat membantu anda dalam menyelesaikan permasalahan terkait Ilmu Komputer. Terima Kasih.</string>
+    <string name="title_forcoms_definition">Apa Itu Forcoms?</string>
+    <string name="label_continue">Lanjutkan</string>
+    <string name="content_desc_forcoms_intro">Forcoms Intro Art</string>
 </resources>
