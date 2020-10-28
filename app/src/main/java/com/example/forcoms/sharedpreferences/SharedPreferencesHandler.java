@@ -5,11 +5,11 @@ import android.content.SharedPreferences;
 
 public class SharedPreferencesHandler {
     private SharedPreferences sharedPreferences;
-    private SharedPreferencesHandler INSTANCE;
+    private static SharedPreferencesHandler INSTANCE;
     private static final String GLOBAL_PREF_NAME = "com.example.forcoms.main_shared_preferences";
 
 
-    public SharedPreferencesHandler getSharedPreferencesHandler(Context context) {
+    public static SharedPreferencesHandler getSharedPreferencesHandler(Context context) {
         if (INSTANCE == null) {
             INSTANCE = new SharedPreferencesHandler(context);
         }
