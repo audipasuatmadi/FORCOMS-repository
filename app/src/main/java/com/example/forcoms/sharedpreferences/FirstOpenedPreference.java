@@ -10,11 +10,11 @@ public class FirstOpenedPreference {
         sharedPreferencesHandler = SharedPreferencesHandler.getSharedPreferencesHandler(context);
     }
 
-    public boolean isFirstOpened() {
+    public boolean hasOpenedBefore() {
         return this.sharedPreferencesHandler.getBoolValueFromSP(FIRST_OPENED_KEY);
     }
 
-    public void setIsFirstOpened(boolean value) {
+    public void setHasOpenedBefore(boolean value) {
         this.sharedPreferencesHandler.setBoolValueToSP(FIRST_OPENED_KEY, value);
     }
 

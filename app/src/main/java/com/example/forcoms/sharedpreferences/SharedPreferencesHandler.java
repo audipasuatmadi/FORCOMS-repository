@@ -31,7 +31,7 @@ public class SharedPreferencesHandler {
     }
 
     public boolean getBoolValueFromSP(String key) {
-        return sharedPreferences.getBoolean(key, true);
+        return sharedPreferences.getBoolean(key, false);
     }
 
     private SharedPreferencesHandler(Context context) {
