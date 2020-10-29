@@ -12,7 +12,8 @@
         <activity android:name=".LandingActivity"
             android:noHistory="true"
             android:theme="@style/FORCOMS.NoActionBar"/>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
