@@ -4,4 +4,9 @@
     <string name="title_forcoms_definition">Apa Itu Forcoms?</string>
     <string name="label_continue">Lanjutkan</string>
     <string name="content_desc_forcoms_intro">Forcoms Intro Art</string>
+    <string name="label_topic_list">Daftar Topik</string>
+    <string name="label_topic_subs">Topik Diikuti</string>
+    <string name="label_my_profile">Profil Saya</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

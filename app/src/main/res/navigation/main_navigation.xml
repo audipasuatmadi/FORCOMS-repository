@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/navigation_topics">
+
+    <fragment
+        android:id="@+id/navigation_topics"
+        android:name="com.example.forcoms.TopicsListFragment"
+        android:label="Daftar Topik"
+        tools:layout="@layout/fragment_topics_list" />
+    <fragment
+        android:id="@+id/navigation_subscriptions"
+        android:name="com.example.forcoms.TopicsSubscriptionsFragment"
+        android:label="Topik Diikuti"
+        tools:layout="@layout/fragment_topics_subscriptions" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.forcoms.MyProfileFragment"
+        android:label="Profil Saya"
+        tools:layout="@layout/fragment_my_profile" />
+    <fragment
+        android:id="@+id/registerUserFragment"
+        android:name="com.example.forcoms.RegisterUserFragment"
+        android:label="Registrasi Akun"
+        tools:layout="@layout/fragment_register_user" />
+</navigation>
