@@ -9,4 +9,9 @@
     <string name="label_my_profile">Profil Saya</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_title">apa itu forcorms</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="label_register">Register</string>
+    <string name="label_have_account">Sudah memiliki akun</string>
 </resources>
