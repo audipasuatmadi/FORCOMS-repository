@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserDao {
 
     @Insert()
-    void addUserData(UserData userData);
+    long addUserData(UserData userData);
 
     @Query("SELECT * FROM users")
     LiveData<List<UserData>> getAllUserData();

@@ -1,10 +1,13 @@
 package com.example.forcoms;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.forcoms.sharedpreferences.UserDataPreference;
 import com.example.forcoms.userentity.UserDao;
 import com.example.forcoms.userentity.UserData;
 
@@ -20,8 +23,8 @@ public class ForcomsRepository {
         allUsers = userDao.getAllUserData();
     }
 
-    public void insertUserData(UserData userData) {
-        new insertAsyncTask(userDao).execute(userData);
+    public void insertUserData(UserData userData, Context context) {
+        new insertAsyncTask(userDao, context).execute(userData);
     }
 
     public LiveData<List<UserData>> getAllUsers() {
@@ -34,14 +37,18 @@ public class ForcomsRepository {
 
     private static class insertAsyncTask extends AsyncTask<UserData, Void, Void> {
         private UserDao asyncTaskDao;
+        private final Context context;
 
-        insertAsyncTask(UserDao userDao) {
+        insertAsyncTask(UserDao userDao, Context context) {
             asyncTaskDao = userDao;
+            this.context = context;
         }
 
         @Override
         protected Void doInBackground(UserData... noteEntities) {
-            asyncTaskDao.addUserData(noteEntities[0]);
+            long userId = asyncTaskDao.addUserData(noteEntities[0]);
+            UserDataPreference userDataPreference = new UserDataPreference(this.context);
+            userDataPreference.setLoggedInId(userId);
             return null;
         }
     }
