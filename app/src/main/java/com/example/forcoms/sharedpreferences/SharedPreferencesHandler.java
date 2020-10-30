@@ -34,6 +34,15 @@ public class SharedPreferencesHandler {
         return sharedPreferences.getBoolean(key, false);
     }
 
+    public void setIntegerValueToSP(String key, int value) {
+        SharedPreferences.Editor prefEditor = sharedPreferences.edit();
+        prefEditor.putInt(key, value);
+    }
+
+    public int getIntegerValueFromSP(String key) {
+        return sharedPreferences.getInt(key, 0);
+    }
+
     private SharedPreferencesHandler(Context context) {
         sharedPreferences = context.getSharedPreferences(GLOBAL_PREF_NAME, Context.MODE_PRIVATE);
     }

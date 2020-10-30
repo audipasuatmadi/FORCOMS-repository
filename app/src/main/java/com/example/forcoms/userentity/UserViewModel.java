@@ -28,7 +28,7 @@ public class UserViewModel extends AndroidViewModel {
         return noteRepository.getLoggedInData(id);
     }
 
-    public void addNote(UserData userData) {
+    public void addUserData(UserData userData) {
         noteRepository.insertUserData(userData);
     }
 }
