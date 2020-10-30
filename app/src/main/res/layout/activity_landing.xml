@@ -13,7 +13,7 @@
         android:textAlignment="center"
         style="@style/Base.Widget.AppCompat.TextView.Header01"
         android:layout_marginTop="50dp"
-        android:text="@string/title_forcoms_definition"/>
+        android:text="@string/label_title"/>
 
     <ImageView
         android:layout_width="match_parent"
