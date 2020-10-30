@@ -36,11 +36,20 @@ public class SharedPreferencesHandler {
 
     public void setIntegerValueToSP(String key, int value) {
         SharedPreferences.Editor prefEditor = sharedPreferences.edit();
-        prefEditor.putInt(key, value);
+        prefEditor.putInt(key, value).apply();
     }
 
     public int getIntegerValueFromSP(String key) {
         return sharedPreferences.getInt(key, 0);
+    }
+
+    public void setLongValueToSP(String key, long value) {
+        SharedPreferences.Editor prefEditor = sharedPreferences.edit();
+        prefEditor.putLong(key, value).apply();
+    }
+
+    public long getLongValueFromSP(String key) {
+        return sharedPreferences.getLong(key, 0);
     }
 
     private SharedPreferencesHandler(Context context) {

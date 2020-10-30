@@ -6,9 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.room.util.StringUtil;
 
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.forcoms.sharedpreferences.UserDataPreference;
 import com.example.forcoms.userentity.UserData;
 import com.example.forcoms.userentity.UserViewModel;
 
@@ -46,6 +52,15 @@ public class RegisterUserFragment extends Fragment {
 
         UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
+        usernameEditText.setFilters(new InputFilter[] {
+                new InputFilter.AllCaps() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                        return String.valueOf(source).toLowerCase().replace(" ", "");
+                    }
+                }
+        });
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,14 +68,17 @@ public class RegisterUserFragment extends Fragment {
                 String passwordValue = passwordEditText.getText().toString();
 
                 if (TextUtils.isEmpty(usernameValue.trim()) || TextUtils.isEmpty(passwordValue.trim())) {
-                    Toast.makeText(view.getContext(), "Username dan Password harus isi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "username dan password tidak boleh kosong", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 UserData newUserData = new UserData(usernameValue, passwordValue);
 
-                userViewModel.addUserData(newUserData);
-                Toast.makeText(view.getContext(), "Very nice", Toast.LENGTH_SHORT).show();
+                userViewModel.addUserData(newUserData, view.getContext());
+                Toast.makeText(view.getContext(), "selamat bergabung, " + usernameValue + "!", Toast.LENGTH_SHORT).show();
+
+                final NavController navController = Navigation.findNavController(view);
+                navController.popBackStack();
 
             }
         });
