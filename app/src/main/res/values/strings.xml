@@ -9,4 +9,5 @@
     <string name="label_my_profile">Profil Saya</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_title">apa itu forcorms</string>
 </resources>
