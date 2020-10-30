@@ -25,4 +25,9 @@
         android:name="com.example.forcoms.RegisterUserFragment"
         android:label="Registrasi Akun"
         tools:layout="@layout/fragment_register_user" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.forcoms.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
