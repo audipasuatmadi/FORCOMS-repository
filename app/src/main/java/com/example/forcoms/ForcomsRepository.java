@@ -48,7 +48,7 @@ public class ForcomsRepository {
     }
 
     private static class getUserDataWithCredentialsAsync extends AsyncTask<String, Void, UserData> {
-        private UserDao asyncTaskDao;
+        private final UserDao asyncTaskDao;
         iGetUserDataCredentials callback;
 
         getUserDataWithCredentialsAsync(UserDao userDao, Fragment selectedFragment) {
@@ -71,7 +71,7 @@ public class ForcomsRepository {
 
 
     private static class insertAsyncTask extends AsyncTask<UserData, Void, Void> {
-        private UserDao asyncTaskDao;
+        private final UserDao asyncTaskDao;
         private final Context context;
 
         insertAsyncTask(UserDao userDao, Context context) {

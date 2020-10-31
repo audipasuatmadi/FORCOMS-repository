@@ -40,6 +40,6 @@ public class MyProfileFragment extends Fragment {
 
         final NavController navController = Navigation.findNavController(view);
         navController.popBackStack();
-        navController.navigate(R.id.registerUserFragment);
+        navController.navigate(R.id.loginFragment);
     }
 }

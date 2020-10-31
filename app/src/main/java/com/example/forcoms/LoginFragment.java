@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.forcoms.sharedpreferences.UserDataPreference;
 import com.example.forcoms.userentity.UserData;
 import com.example.forcoms.userentity.UserViewModel;
 
@@ -73,7 +74,10 @@ public class LoginFragment extends Fragment implements ForcomsRepository.iGetUse
     @Override
     public void onUserDataUpdate(UserData userData) {
         if (userData != null) {
-            Toast.makeText(this.getContext(), "selamat datang " + userData.getUsername(), Toast.LENGTH_SHORT).show();
+            UserDataPreference userDataPreference = new UserDataPreference(this.getContext());
+            userDataPreference.setLoggedInId(userData.getId());
+            userDataPreference.setIsLoggedIn(true);
+            Toast.makeText(this.getContext(), "selamat datang " + userDataPreference.getLoggedId(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this.getContext(), "akun tidak ditemukan", Toast.LENGTH_SHORT).show();
         }
