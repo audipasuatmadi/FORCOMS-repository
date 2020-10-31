@@ -15,4 +15,7 @@
     <string name="label_register">Register</string>
     <string name="label_have_account">Sudah memiliki akun</string>
     <string name="label_button_change_password">Ganti password</string>
+    <string name="label_login">Button</string>
+    <string name="label_log">Login</string>
+    <string name="label_buatakun">Buat akun</string>
 </resources>
