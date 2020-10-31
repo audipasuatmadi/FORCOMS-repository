@@ -28,6 +28,6 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.forcoms.LoginFragment"
-        android:label="fragment_login"
+        android:label="Login Akun"
         tools:layout="@layout/fragment_login" />
 </navigation>
