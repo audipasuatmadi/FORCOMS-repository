@@ -1,8 +1,10 @@
 package com.example.forcoms.userentity;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -28,7 +30,11 @@ public class UserViewModel extends AndroidViewModel {
         return noteRepository.getLoggedInData(id);
     }
 
-    public void addNote(UserData userData) {
-        noteRepository.insertUserData(userData);
+    public void getUserDataWithCredentials(String username, String password, Fragment fragment) {
+        noteRepository.getUserDataWithCredentials(username, password, fragment);
+    }
+
+    public void addUserData(UserData userData, Context context) {
+        noteRepository.insertUserData(userData, context);
     }
 }

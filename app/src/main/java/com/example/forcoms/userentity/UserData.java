@@ -22,8 +22,7 @@ public class UserData {
     private String password;
 
 
-    public UserData(int id, @NotNull String username, @NotNull String password) {
-        this.id = id;
+    public UserData(@NotNull String username, @NotNull String password) {
         this.username = username;
         this.password = password;
     }
@@ -40,6 +39,10 @@ public class UserData {
     @NonNull
     public String getPassword() {
         return password;
+    }
+
+    public void setId(@NonNull int id) {
+        this.id = id;
     }
 
     public void setUsername(@NonNull String username) { this.username = username; }
