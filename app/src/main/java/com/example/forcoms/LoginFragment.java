@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment implements ForcomsRepository.iGetUse
         Button gotoRegisterButton = view.findViewById(R.id.button_register);
         Button loginButton = view.findViewById(R.id.button_login);
         EditText usernameEditText = view.findViewById(R.id.login_input_username);
-        EditText passwordEditText = view.findViewById(R.id.register_input_password);
+        EditText passwordEditText = view.findViewById(R.id.login_input_password);
 
         UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
