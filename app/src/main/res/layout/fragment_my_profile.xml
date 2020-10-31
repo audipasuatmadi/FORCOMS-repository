@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MyProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/logout_username"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="My Profile" />
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/WhiteSmoke"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/logout_username"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black"/>
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/logout_password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/WhiteSmoke"
+        android:hint="@string/logout_password"
+        android:inputType="text|textPassword"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+    <Button
+        android:id="@+id/Logout_edit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="250dp"
+        android:text="@string/logout_edit"
+        android:backgroundTint="@color/blueRoyal"/>
+
+    <Button
+        android:id="@+id/Logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/logout_button"
+        android:backgroundTint="@color/red"/>
+
+
+</LinearLayout>
