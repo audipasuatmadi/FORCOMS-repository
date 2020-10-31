@@ -5,16 +5,25 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.forcoms.userentity.UserData;
+import com.example.forcoms.userentity.UserViewModel;
+
+import java.util.Objects;
 
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements ForcomsRepository.iGetUserDataCredentials {
 
     private NavController navController;
 
@@ -34,13 +43,39 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
-
         Button gotoRegisterButton = view.findViewById(R.id.button_register);
+        Button loginButton = view.findViewById(R.id.button_login);
+        EditText usernameEditText = view.findViewById(R.id.login_input_username);
+        EditText passwordEditText = view.findViewById(R.id.register_input_password);
+
+        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
+        loginButton.setOnClickListener(view1 -> {
+            String usernameValue = usernameEditText.getText().toString();
+            String passwordValue = passwordEditText.getText().toString();
+
+            if (TextUtils.isEmpty(usernameValue.trim()) || TextUtils.isEmpty(passwordValue.trim())) {
+                Toast.makeText(view.getContext(), "username dan password tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            userViewModel.getUserDataWithCredentials(usernameValue, passwordValue, this);
+
+        });
 
         gotoRegisterButton.setOnClickListener(view1 -> {
             navController.popBackStack();
             navController.navigate(R.id.registerUserFragment);
         });
 
+    }
+
+    @Override
+    public void onUserDataUpdate(UserData userData) {
+        if (userData != null) {
+            Toast.makeText(this.getContext(), "selamat datang " + userData.getUsername(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this.getContext(), "akun tidak ditemukan", Toast.LENGTH_SHORT).show();
+        }
     }
 }
