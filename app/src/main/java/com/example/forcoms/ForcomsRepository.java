@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.forcoms.sharedpreferences.UserDataPreference;
@@ -23,6 +25,12 @@ public class ForcomsRepository {
         allUsers = userDao.getAllUserData();
     }
 
+    public interface iGetUserDataCredentials {
+        void onUserDataUpdate(UserData userData);
+    }
+
+
+
     public void insertUserData(UserData userData, Context context) {
         new insertAsyncTask(userDao, context).execute(userData);
     }
@@ -35,8 +43,35 @@ public class ForcomsRepository {
         return userDao.getUserFromId(id);
     }
 
+    public void getUserDataWithCredentials(String username, String password, Fragment fragment) {
+        new getUserDataWithCredentialsAsync(userDao, fragment).execute(username, password);
+    }
+
+    private static class getUserDataWithCredentialsAsync extends AsyncTask<String, Void, UserData> {
+        private final UserDao asyncTaskDao;
+        iGetUserDataCredentials callback;
+
+        getUserDataWithCredentialsAsync(UserDao userDao, Fragment selectedFragment) {
+            asyncTaskDao = userDao;
+            this.callback = (iGetUserDataCredentials) selectedFragment;
+        }
+
+        @Override
+        @Nullable
+        protected UserData doInBackground(String... credentials) {
+            return asyncTaskDao.getUserWithCredentials(credentials[0], credentials[1]);
+        }
+
+        @Override
+        protected void onPostExecute(UserData userData) {
+            super.onPostExecute(userData);
+            callback.onUserDataUpdate(userData);
+        }
+    }
+
+
     private static class insertAsyncTask extends AsyncTask<UserData, Void, Void> {
-        private UserDao asyncTaskDao;
+        private final UserDao asyncTaskDao;
         private final Context context;
 
         insertAsyncTask(UserDao userDao, Context context) {

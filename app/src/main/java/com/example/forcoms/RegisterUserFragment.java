@@ -31,6 +31,8 @@ public class RegisterUserFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private NavController navController;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +49,10 @@ public class RegisterUserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Button registerButton = view.findViewById(R.id.register_button_register);
+        Button gotoLoginPageButton = view.findViewById(R.id.register_button_login);
         EditText usernameEditText = view.findViewById(R.id.register_input_username);
         EditText passwordEditText = view.findViewById(R.id.register_input_password);
+        navController = Navigation.findNavController(view);
 
         UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
@@ -77,10 +81,15 @@ public class RegisterUserFragment extends Fragment {
                 userViewModel.addUserData(newUserData, view.getContext());
                 Toast.makeText(view.getContext(), "selamat bergabung, " + usernameValue + "!", Toast.LENGTH_SHORT).show();
 
-                final NavController navController = Navigation.findNavController(view);
+
                 navController.popBackStack();
 
             }
+        });
+
+        gotoLoginPageButton.setOnClickListener(view1 -> {
+            navController.popBackStack();
+            navController.navigate(R.id.loginFragment);
         });
     }
 }
