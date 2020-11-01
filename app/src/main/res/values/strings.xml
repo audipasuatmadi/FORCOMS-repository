@@ -21,4 +21,8 @@
     <string name="logout_password">Password</string>
     <string name="logout_button">Logout</string>
     <string name="logout_edit">edit</string>
+    <string name="hint_password_lama">Password Lama</string>
+    <string name="hint_password_baru">Password Baru</string>
+    <string name="hint_konfirmasi_password_baru">Konfirmasi Password Baru</string>
+    <string name="label_ganti_password">Ganti Password</string>
 </resources>

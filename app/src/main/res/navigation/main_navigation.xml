@@ -30,4 +30,9 @@
         android:name="com.example.forcoms.LoginFragment"
         android:label="Login Akun"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.forcoms.ChangePasswordFragment"
+        android:label="fragment_change_password2"
+        tools:layout="@layout/fragment_change_password2" />
 </navigation>
