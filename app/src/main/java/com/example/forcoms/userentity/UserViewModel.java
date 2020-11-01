@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -13,28 +14,33 @@ import com.example.forcoms.ForcomsRepository;
 import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
-    private ForcomsRepository noteRepository;
-    private final LiveData<List<UserData>> allUserData;
+    private final ForcomsRepository forcomsRepository;
+
+    private UserData loggedInUser;
 
     public UserViewModel(@NonNull Application application) {
         super(application);
-        noteRepository = new ForcomsRepository(application);
-        allUserData = noteRepository.getAllUsers();
+        forcomsRepository = new ForcomsRepository(application);
     }
 
-    public LiveData<List<UserData>> getAllUserData() {
-        return allUserData;
+
+    public UserData getLoggedInUser() {
+        return loggedInUser;
     }
 
-    public UserData getLoggedInUserData(int id) {
-        return noteRepository.getLoggedInData(id);
+    public void setLoggedInUser(UserData userData) {
+        this.loggedInUser = userData;
     }
 
     public void getUserDataWithCredentials(String username, String password, Fragment fragment) {
-        noteRepository.getUserDataWithCredentials(username, password, fragment);
+        forcomsRepository.getUserDataWithCredentials(username, password, fragment);
     }
 
     public void addUserData(UserData userData, Context context) {
-        noteRepository.insertUserData(userData, context);
+        forcomsRepository.insertUserData(userData, context);
+    }
+
+    public void getUserDataWithId(long id, Context context) {
+        forcomsRepository.getUserDataWithId(id, context);
     }
 }

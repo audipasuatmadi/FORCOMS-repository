@@ -1,6 +1,7 @@
 package com.example.forcoms;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -11,20 +12,31 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.forcoms.sharedpreferences.FirstOpenedPreference;
+import com.example.forcoms.sharedpreferences.UserDataPreference;
+import com.example.forcoms.userentity.UserData;
+import com.example.forcoms.userentity.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ForcomsRepository.iGetUserDataCredentials {
 
-    private FirstOpenedPreference firstOpenedPreference;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
         if (!checkIfHasOpenedBefore()) {
             Intent intent = new Intent(this, LandingActivity.class);
             startActivity(intent);
+        }
+
+        UserDataPreference userDataPreference = new UserDataPreference(this);
+        if (userDataPreference.isLoggedIn()) {
+            long loggedInId = userDataPreference.getLoggedId();
+            userViewModel.getUserDataWithId(loggedInId, this);
         }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_bar_bottom);
@@ -35,7 +47,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkIfHasOpenedBefore() {
-        firstOpenedPreference = new FirstOpenedPreference(this.getApplicationContext());
+        FirstOpenedPreference firstOpenedPreference = new FirstOpenedPreference(this.getApplicationContext());
         return firstOpenedPreference.hasOpenedBefore();
+    }
+
+
+    @Override
+    public void onUserDataUpdate(UserData userData) {
+        if (userData == null) {
+            Toast.makeText(this, "user gagal ditemukan", Toast.LENGTH_SHORT).show();
+        } else {
+            userViewModel.setLoggedInUser(userData);
+        }
     }
 }

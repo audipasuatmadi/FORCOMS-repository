@@ -16,14 +16,14 @@ import com.example.forcoms.userentity.UserData;
 import java.util.List;
 
 public class ForcomsRepository {
-    private UserDao userDao;
-    private final LiveData<List<UserData>> allUsers;
+    private final UserDao userDao;
 
     public ForcomsRepository(Application application) {
         ForcomsDB forcomsDB = ForcomsDB.getDatabase(application);
         userDao = forcomsDB.userDao();
-        allUsers = userDao.getAllUserData();
     }
+
+
 
     public interface iGetUserDataCredentials {
         void onUserDataUpdate(UserData userData);
@@ -35,17 +35,36 @@ public class ForcomsRepository {
         new insertAsyncTask(userDao, context).execute(userData);
     }
 
-    public LiveData<List<UserData>> getAllUsers() {
-        return allUsers;
-    }
-
-    public UserData getLoggedInData(int id) {
-        return userDao.getUserFromId(id);
-    }
-
     public void getUserDataWithCredentials(String username, String password, Fragment fragment) {
         new getUserDataWithCredentialsAsync(userDao, fragment).execute(username, password);
     }
+
+    public void getUserDataWithId(long id, Context context) {
+        new getUserDataWithIdAsync(userDao, context).execute(id);
+    }
+
+    private static class getUserDataWithIdAsync extends AsyncTask<Long, Void, UserData> {
+        private final UserDao asyncTaskDao;
+        iGetUserDataCredentials callback;
+
+        getUserDataWithIdAsync(UserDao userDao, Context context) {
+            asyncTaskDao = userDao;
+            this.callback = (iGetUserDataCredentials) context;
+        }
+
+        @Override
+        @Nullable
+        protected UserData doInBackground(Long... id) {
+            return asyncTaskDao.getUserFromId(id[0]);
+        }
+
+        @Override
+        protected void onPostExecute(UserData userData) {
+            super.onPostExecute(userData);
+            callback.onUserDataUpdate(userData);
+        }
+    }
+
 
     private static class getUserDataWithCredentialsAsync extends AsyncTask<String, Void, UserData> {
         private final UserDao asyncTaskDao;
