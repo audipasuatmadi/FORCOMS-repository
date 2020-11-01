@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".topicentity.AddTopicFragment"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Judul Topik"/>
+
+    <EditText
+        android:id="@+id/add_topic_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pertanyaan / Pendapat Pembuka"/>
+    
+    <EditText
+        android:id="@+id/add_topic_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="5"
+        android:gravity="top|start"
+        android:inputType="text|textMultiLine"/>
+    
+    <Button
+        android:id="@+id/add_topic_submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buka Topik"/>
+    
+
+</LinearLayout>

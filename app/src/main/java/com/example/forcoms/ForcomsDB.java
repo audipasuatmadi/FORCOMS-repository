@@ -11,7 +11,7 @@ import com.example.forcoms.topicentity.TopicData;
 import com.example.forcoms.userentity.UserDao;
 import com.example.forcoms.userentity.UserData;
 
-@Database(entities = {UserData.class, TopicData.class}, version = 2)
+@Database(entities = {UserData.class, TopicData.class}, version = 3)
 public abstract class ForcomsDB extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract TopicDao topicDao();

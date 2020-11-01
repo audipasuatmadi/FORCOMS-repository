@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +27,7 @@ import com.example.forcoms.topicentity.TopicViewModel;
 import com.example.forcoms.topicentity.TopicWithUser;
 import com.example.forcoms.userentity.UserData;
 import com.example.forcoms.userentity.UserViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -41,8 +44,13 @@ public class TopicsListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab_open_topic);
+        NavController navController = Navigation.findNavController(view);
+
         RecyclerView recyclerView = view.findViewById(R.id.topic_lists_recycler_view);
         final TopicAdapter topicAdapter = new TopicAdapter(this.getContext());
+
+        UserDataPreference userDataPreference = new UserDataPreference(requireActivity());
 
         recyclerView.setAdapter(topicAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -52,6 +60,14 @@ public class TopicsListFragment extends Fragment {
             @Override
             public void onChanged(List<TopicWithUser> topicWithUsers) {
                 topicAdapter.setTopics(topicWithUsers);
+            }
+        });
+
+        floatingActionButton.setOnClickListener(view1 -> {
+            if (userDataPreference.isLoggedIn()) {
+                navController.navigate(R.id.addTopicFragment);
+            } else {
+                navController.navigate(R.id.navigation_profile);
             }
         });
 
