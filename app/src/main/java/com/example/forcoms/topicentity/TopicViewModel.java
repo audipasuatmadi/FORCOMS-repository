@@ -3,6 +3,7 @@ package com.example.forcoms.topicentity;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -20,8 +21,8 @@ public class TopicViewModel extends AndroidViewModel {
         allTopics = forcomsRepository.getAllTopics();
     }
 
-    public void addTopic(TopicData topicData) {
-        forcomsRepository.insertTopicData(topicData);
+    public void addTopic(TopicData topicData, Fragment fragment) {
+        forcomsRepository.insertTopicData(topicData, fragment);
     }
 
     public LiveData<List<TopicWithUser>> getAllTopics() {
