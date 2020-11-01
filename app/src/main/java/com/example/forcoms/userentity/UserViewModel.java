@@ -43,4 +43,8 @@ public class UserViewModel extends AndroidViewModel {
     public void getUserDataWithId(long id, Context context) {
         forcomsRepository.getUserDataWithId(id, context);
     }
+
+    public void updateUserData(UserData userData, Fragment context) {
+        forcomsRepository.updateUserData(userData, context);
+    }
 }
