@@ -39,6 +39,11 @@ public class MyProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        Button changePasswordButton=view.findViewById(R.id.logout_edit);
+
+        changePasswordButton.setOnClickListener(view1->{
+            navController.navigate(R.id.changePasswordFragment);
+        });
 
         UserDataPreference userDataPreference = new UserDataPreference(this.getContext());
         if (userDataPreference.isLoggedIn()) {
