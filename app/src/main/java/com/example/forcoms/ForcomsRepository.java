@@ -29,6 +29,10 @@ public class ForcomsRepository {
         void onUserDataUpdate(UserData userData);
     }
 
+    public interface iGetChangeUserDataFeedback {
+        void onUserDataChange(boolean isCompleted);
+    }
+
 
 
     public void insertUserData(UserData userData, Context context) {
@@ -42,6 +46,35 @@ public class ForcomsRepository {
     public void getUserDataWithId(long id, Context context) {
         new getUserDataWithIdAsync(userDao, context).execute(id);
     }
+
+    public void updateUserData(UserData userData, Fragment context) {
+        new UpdateUserDataAsync(userDao, context).execute(userData);
+    }
+
+    private static class UpdateUserDataAsync extends AsyncTask<UserData, Void, Boolean> {
+        private final UserDao asyncTaskDao;
+        private final iGetChangeUserDataFeedback callback;
+
+        UpdateUserDataAsync(UserDao userDao, Fragment context) {
+            asyncTaskDao = userDao;
+            callback = (iGetChangeUserDataFeedback) context;
+        }
+
+        @Override
+        @Nullable
+        protected Boolean doInBackground(UserData... userData) {
+            asyncTaskDao.updateUserData(userData[0]);
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            callback.onUserDataChange(aBoolean);
+        }
+    }
+
+
 
     private static class getUserDataWithIdAsync extends AsyncTask<Long, Void, UserData> {
         private final UserDao asyncTaskDao;

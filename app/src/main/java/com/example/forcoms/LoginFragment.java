@@ -80,6 +80,10 @@ public class LoginFragment extends Fragment implements ForcomsRepository.iGetUse
             userDataPreference.setIsLoggedIn(true);
             userViewModel.setLoggedInUser(userData);
             Toast.makeText(this.getContext(), "selamat datang " + userDataPreference.getLoggedId(), Toast.LENGTH_SHORT).show();
+
+            navController.popBackStack();
+            navController.navigate(R.id.navigation_profile);
+
         } else {
             Toast.makeText(this.getContext(), "akun tidak ditemukan", Toast.LENGTH_SHORT).show();
         }
