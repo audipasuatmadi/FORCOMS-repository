@@ -35,4 +35,9 @@
         android:name="com.example.forcoms.ChangePasswordFragment"
         android:label="fragment_change_password2"
         tools:layout="@layout/fragment_change_password2" />
+    <fragment
+        android:id="@+id/change_username"
+        android:name="com.example.forcoms.Change_username"
+        android:label="fragment_change_username"
+        tools:layout="@layout/fragment_change_username" />
 </navigation>
