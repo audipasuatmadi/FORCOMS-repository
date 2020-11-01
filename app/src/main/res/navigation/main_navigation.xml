@@ -40,4 +40,9 @@
         android:name="com.example.forcoms.Change_username"
         android:label="fragment_change_username"
         tools:layout="@layout/fragment_change_username" />
+    <fragment
+        android:id="@+id/addTopicFragment"
+        android:name="com.example.forcoms.topicentity.AddTopicFragment"
+        android:label="fragment_add_topic"
+        tools:layout="@layout/fragment_add_topic" />
 </navigation>
