@@ -40,7 +40,7 @@ public class ChangePasswordFragment extends Fragment implements ForcomsRepositor
         EditText oldPassword=view.findViewById(R.id.change_old_password);
         EditText newPassword=view.findViewById(R.id.change_new_password);
         EditText confirmNewPassword=view.findViewById(R.id.change_confirm_new_password);
-        Button buttonPassword=view.findViewById(R.id.change_password_button_ganti);
+        Button buttonPassword=view.findViewById(R.id.change_password_button_ChangeNow);
 
         UserViewModel userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 

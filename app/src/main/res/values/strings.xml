@@ -25,4 +25,8 @@
     <string name="hint_password_baru">Password Baru</string>
     <string name="hint_konfirmasi_password_baru">Konfirmasi Password Baru</string>
     <string name="label_ganti_password">Ganti Password</string>
+    <string name="hint_old_password">Old Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_confirm_new_password">Confirm New Password</string>
+    <string name="label_change_now">Change Now</string>
 </resources>
