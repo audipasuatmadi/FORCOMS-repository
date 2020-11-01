@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -47,7 +48,7 @@ public class MyProfileFragment extends Fragment {
 
         UserDataPreference userDataPreference = new UserDataPreference(this.getContext());
         if (userDataPreference.isLoggedIn()) {
-            UserViewModel userViewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel.class);
+            UserViewModel userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
             UserData loggedInUser = userViewModel.getLoggedInUser();
             inflateUserDataToViews(loggedInUser, view);
 

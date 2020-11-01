@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -50,7 +51,7 @@ public class LoginFragment extends Fragment implements ForcomsRepository.iGetUse
         EditText usernameEditText = view.findViewById(R.id.login_input_username);
         EditText passwordEditText = view.findViewById(R.id.login_input_password);
 
-        userViewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         loginButton.setOnClickListener(view1 -> {
             String usernameValue = usernameEditText.getText().toString();
