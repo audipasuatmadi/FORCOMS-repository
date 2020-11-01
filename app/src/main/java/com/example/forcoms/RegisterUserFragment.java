@@ -54,7 +54,7 @@ public class RegisterUserFragment extends Fragment {
         EditText passwordEditText = view.findViewById(R.id.register_input_password);
         navController = Navigation.findNavController(view);
 
-        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        UserViewModel userViewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel.class);
 
         usernameEditText.setFilters(new InputFilter[] {
                 new InputFilter.AllCaps() {

@@ -27,6 +27,7 @@ import java.util.Objects;
 public class LoginFragment extends Fragment implements ForcomsRepository.iGetUserDataCredentials {
 
     private NavController navController;
+    private UserViewModel userViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class LoginFragment extends Fragment implements ForcomsRepository.iGetUse
         EditText usernameEditText = view.findViewById(R.id.login_input_username);
         EditText passwordEditText = view.findViewById(R.id.login_input_password);
 
-        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel.class);
 
         loginButton.setOnClickListener(view1 -> {
             String usernameValue = usernameEditText.getText().toString();
@@ -77,6 +78,7 @@ public class LoginFragment extends Fragment implements ForcomsRepository.iGetUse
             UserDataPreference userDataPreference = new UserDataPreference(this.getContext());
             userDataPreference.setLoggedInId(userData.getId());
             userDataPreference.setIsLoggedIn(true);
+            userViewModel.setLoggedInUser(userData);
             Toast.makeText(this.getContext(), "selamat datang " + userDataPreference.getLoggedId(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this.getContext(), "akun tidak ditemukan", Toast.LENGTH_SHORT).show();

@@ -15,11 +15,8 @@ public interface UserDao {
     @Insert()
     long addUserData(UserData userData);
 
-    @Query("SELECT * FROM users")
-    LiveData<List<UserData>> getAllUserData();
-
     @Query("SELECT * FROM users WHERE id=:id LIMIT 1")
-    UserData getUserFromId(int id);
+    UserData getUserFromId(long id);
 
     @Query("SELECT * FROM users WHERE username=:username AND password=:password LIMIT 1")
     @Nullable
