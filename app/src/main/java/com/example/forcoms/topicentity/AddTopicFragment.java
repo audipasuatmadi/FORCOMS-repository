@@ -18,9 +18,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.forcoms.R;
+import com.example.forcoms.commententity.CommentData;
+import com.example.forcoms.commententity.CommentViewModel;
 import com.example.forcoms.sharedpreferences.UserDataPreference;
 
-public class AddTopicFragment extends Fragment {
+public class AddTopicFragment extends Fragment implements AddTopicListener {
+
+    private long userId;
+    private String commentValue;
+    private CommentViewModel commentViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,22 +43,32 @@ public class AddTopicFragment extends Fragment {
         Button submitButton = view.findViewById(R.id.add_topic_submit_button);
 
         TopicViewModel topicViewModel = new ViewModelProvider(requireActivity()).get(TopicViewModel.class);
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
+
         NavController navController = Navigation.findNavController(view);
 
         submitButton.setOnClickListener(view1 -> {
             String titleValue = titleInput.getText().toString();
-            String commentValue = commentInput.getText().toString();
+            commentValue = commentInput.getText().toString();
 
             if (TextUtils.isEmpty(titleValue.trim()) || TextUtils.isEmpty(commentValue.trim())) {
                 Toast.makeText(this.getContext(), "input tidak boleh kosong", Toast.LENGTH_SHORT).show();
             } else {
-                TopicData topicData = new TopicData(titleValue, new UserDataPreference(requireActivity()).getLoggedId());
-                topicViewModel.addTopic(topicData);
-                Toast.makeText(this.getContext(), "topik berhasil dibuka", Toast.LENGTH_SHORT).show();
+                userId = new UserDataPreference(requireActivity()).getLoggedId();
+                TopicData topicData = new TopicData(titleValue, userId);
+                topicViewModel.addTopic(topicData, this);
+
+//                Toast.makeText(this.getContext(), "topik berhasil dibuka", Toast.LENGTH_SHORT).show();
                 navController.popBackStack();
             }
-
         });
 
+    }
+
+    @Override
+    public void onAddTopic(long topicId) {
+        CommentData commentData = new CommentData(userId, topicId, commentValue);
+        commentViewModel.addComment(commentData);
+        Toast.makeText(this.requireActivity(), ""+topicId, Toast.LENGTH_SHORT).show();
     }
 }
