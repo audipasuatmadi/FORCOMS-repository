@@ -58,7 +58,7 @@ public class AddTopicFragment extends Fragment implements AddTopicListener {
                 TopicData topicData = new TopicData(titleValue, userId);
                 topicViewModel.addTopic(topicData, this);
 
-//                Toast.makeText(this.getContext(), "topik berhasil dibuka", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.getContext(), "topik berhasil dibuka", Toast.LENGTH_SHORT).show();
                 navController.popBackStack();
             }
         });
@@ -69,6 +69,5 @@ public class AddTopicFragment extends Fragment implements AddTopicListener {
     public void onAddTopic(long topicId) {
         CommentData commentData = new CommentData(userId, topicId, commentValue);
         commentViewModel.addComment(commentData);
-        Toast.makeText(this.requireActivity(), ""+topicId, Toast.LENGTH_SHORT).show();
     }
 }
