@@ -1,6 +1,7 @@
 package com.example.forcoms;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,20 +21,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity implements ForcomsRepository.iGetUserDataCredentials {
 
     private UserViewModel userViewModel;
+    UserDataPreference userDataPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         if (!checkIfHasOpenedBefore()) {
             Intent intent = new Intent(this, LandingActivity.class);
             startActivity(intent);
         }
 
-        UserDataPreference userDataPreference = new UserDataPreference(this);
+        userDataPreference = new UserDataPreference(this);
         if (userDataPreference.isLoggedIn()) {
             long loggedInId = userDataPreference.getLoggedId();
             userViewModel.getUserDataWithId(loggedInId, this);
@@ -55,7 +57,10 @@ public class MainActivity extends AppCompatActivity implements ForcomsRepository
     @Override
     public void onUserDataUpdate(UserData userData) {
         if (userData == null) {
+            userDataPreference.setLoggedInId(0);
+            userDataPreference.setIsLoggedIn(false);
             Toast.makeText(this, "user gagal ditemukan", Toast.LENGTH_SHORT).show();
+
         } else {
             userViewModel.setLoggedInUser(userData);
         }

@@ -29,4 +29,8 @@
     <string name="username_old">Old Username</string>
     <string name="username_new">New Username</string>
     <string name="username_button_change">change</string>
+    <string name="hint_old_password">Old Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_confirm_new_password">Confirm New Password</string>
+    <string name="label_change_now">Change Now</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -39,9 +40,9 @@ public class ChangePasswordFragment extends Fragment implements ForcomsRepositor
         EditText oldPassword=view.findViewById(R.id.change_old_password);
         EditText newPassword=view.findViewById(R.id.change_new_password);
         EditText confirmNewPassword=view.findViewById(R.id.change_confirm_new_password);
-        Button buttonPassword=view.findViewById(R.id.change_password_button_ganti);
+        Button buttonPassword=view.findViewById(R.id.change_password_button_ChangeNow);
 
-        UserViewModel userViewModel = ViewModelProviders.of(requireActivity()).get(UserViewModel.class);
+        UserViewModel userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         currentView = view;
 

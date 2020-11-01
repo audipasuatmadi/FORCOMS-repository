@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.forcoms.sharedpreferences.UserDataPreference;
+import com.example.forcoms.topicentity.TopicDao;
+import com.example.forcoms.topicentity.TopicData;
 import com.example.forcoms.userentity.UserDao;
 import com.example.forcoms.userentity.UserData;
 
@@ -17,12 +19,34 @@ import java.util.List;
 
 public class ForcomsRepository {
     private final UserDao userDao;
+    private final TopicDao topicDao;
 
     public ForcomsRepository(Application application) {
         ForcomsDB forcomsDB = ForcomsDB.getDatabase(application);
         userDao = forcomsDB.userDao();
+        topicDao = forcomsDB.topicDao();
     }
 
+
+
+
+    public void insertTopicData(TopicData topicData) {
+        new InsertTopicDataAsync(topicDao).execute(topicData);
+    }
+
+    private static class InsertTopicDataAsync extends AsyncTask<TopicData, Void, Boolean> {
+        private final TopicDao asyncTaskDao;
+
+        InsertTopicDataAsync(TopicDao topicDao) {
+            asyncTaskDao = topicDao;
+        }
+
+        @Override
+        protected Boolean doInBackground(TopicData... topicData) {
+            asyncTaskDao.addTopic(topicData[0]);
+            return true;
+        }
+    }
 
 
     public interface iGetUserDataCredentials {
@@ -32,8 +56,6 @@ public class ForcomsRepository {
     public interface iGetChangeUserDataFeedback {
         void onUserDataChange(boolean isCompleted);
     }
-
-
 
     public void insertUserData(UserData userData, Context context) {
         new insertAsyncTask(userDao, context).execute(userData);
