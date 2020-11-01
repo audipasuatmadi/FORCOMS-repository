@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData;
 import com.example.forcoms.sharedpreferences.UserDataPreference;
 import com.example.forcoms.topicentity.TopicDao;
 import com.example.forcoms.topicentity.TopicData;
+import com.example.forcoms.topicentity.TopicWithUser;
 import com.example.forcoms.userentity.UserDao;
 import com.example.forcoms.userentity.UserData;
 
@@ -20,11 +21,14 @@ import java.util.List;
 public class ForcomsRepository {
     private final UserDao userDao;
     private final TopicDao topicDao;
+    private final LiveData<List<TopicWithUser>> allTopics;
 
     public ForcomsRepository(Application application) {
         ForcomsDB forcomsDB = ForcomsDB.getDatabase(application);
         userDao = forcomsDB.userDao();
         topicDao = forcomsDB.topicDao();
+
+        allTopics = topicDao.getAllTopics();
     }
 
 
@@ -32,6 +36,10 @@ public class ForcomsRepository {
 
     public void insertTopicData(TopicData topicData) {
         new InsertTopicDataAsync(topicDao).execute(topicData);
+    }
+
+    public LiveData<List<TopicWithUser>> getAllTopics() {
+        return this.allTopics;
     }
 
     private static class InsertTopicDataAsync extends AsyncTask<TopicData, Void, Boolean> {

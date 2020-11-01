@@ -33,4 +33,7 @@
     <string name="hint_new_password">New Password</string>
     <string name="hint_confirm_new_password">Confirm New Password</string>
     <string name="label_change_now">Change Now</string>
+    <string name="content_description_open_topic">open a topic</string>
+    <string name="placeholder_topic_title">Judul Topik</string>
+    <string name="placeholder_topic_creator">Nama Penanya</string>
 </resources>
