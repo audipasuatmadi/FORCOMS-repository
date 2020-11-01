@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class UserData {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private int id;
+    private long id;
 
     @ColumnInfo(name = "username")
     @NonNull
@@ -27,7 +27,7 @@ public class UserData {
         this.password = password;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class UserData {
         return password;
     }
 
-    public void setId(@NonNull int id) {
+    public void setId(@NonNull long id) {
         this.id = id;
     }
 
