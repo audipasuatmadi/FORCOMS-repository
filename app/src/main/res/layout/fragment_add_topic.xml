@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Judul Topik"/>
+        android:text="@string/title_topic"/>
 
     <EditText
         android:id="@+id/add_topic_title"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pertanyaan / Pendapat Pembuka"/>
+        android:text="@string/question_topic"/>
     
     <EditText
         android:id="@+id/add_topic_comment"
@@ -34,7 +34,7 @@
         android:id="@+id/add_topic_submit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Buka Topik"/>
+        android:text="@string/start_topic"/>
     
 
 </LinearLayout>
