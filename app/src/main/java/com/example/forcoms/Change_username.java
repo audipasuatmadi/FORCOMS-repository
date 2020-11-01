@@ -2,63 +2,77 @@ package com.example.forcoms;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Change_username#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.forcoms.userentity.UserData;
+import com.example.forcoms.userentity.UserViewModel;
+
 public class Change_username extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public Change_username() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Change_username.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Change_username newInstance(String param1, String param2) {
-        Change_username fragment = new Change_username();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_change_username, container, false);
+    }
+
+    View currentView;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        EditText oldUsername=view.findViewById(R.id.username_old);
+        EditText newUsername=view.findViewById(R.id.username_new);
+        Button buttonChange=view.findViewById(R.id.username_button_change);
+
+        UserViewModel userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+
+        currentView=view;
+        buttonChange.setOnClickListener(view1->{
+            String newUsernameValue = newUsername.getText().toString();
+            String confirmNewUsernameValue = oldUsername.getText().toString();
+
+            if (!TextUtils.isEmpty(newUsernameValue.trim())){
+                if (newUsernameValue.equals(confirmNewUsernameValue)){
+                    String oldUsernameValue = oldUsername.getText().toString();
+                    UserData loggedInUser = userViewModel.getLoggedInUser();
+
+                    if (oldUsernameValue.equals(loggedInUser.getUsername())) {
+                        loggedInUser.setPassword(newUsernameValue);
+                        userViewModel.updateUserData(loggedInUser, this);
+                    } else {
+                        Toast.makeText(this.getContext(), "username lama tidak benar", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(this.getContext(), "username baru tidak match", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    @Override
+    public void onUserDataChange(boolean isCompleted) {
+        if (isCompleted) {
+            Toast.makeText(this.getContext(), "username berhasil diganti", Toast.LENGTH_SHORT).show();
+            NavController navController = Navigation.findNavController(currentView);
+            navController.popBackStack();
+            navController.navigate(R.id.navigation_profile);
+        }
     }
 }
