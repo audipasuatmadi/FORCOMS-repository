@@ -16,7 +16,7 @@
     <string name="label_have_account">Sudah memiliki akun</string>
     <string name="label_login">Button</string>
     <string name="label_log">Login</string>
-    <string name="label_create_account">Buat akun</string>
+    <string name="label_create_account">Belum Memiliki Akun</string>
     <string name="logout_username">Username</string>
     <string name="logout_password">Password</string>
     <string name="logout_button">Logout</string>
