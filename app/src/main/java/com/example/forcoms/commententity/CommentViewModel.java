@@ -10,7 +10,7 @@ import com.example.forcoms.ForcomsRepository;
 
 import java.util.List;
 
-public class CommentViewModel extends AndroidViewModel {
+public class CommentViewModel extends AndroidViewModel implements CommentOfTopicListener {
     private final ForcomsRepository repository;
     private LiveData<List<CommentWithUser>> allCommentsOfATopic;
 
@@ -22,5 +22,13 @@ public class CommentViewModel extends AndroidViewModel {
     public void addComment(CommentData commentData) {
         repository.insertCommentData(commentData);
     }
+    public LiveData<List<CommentWithUser>> getCommentsOfATopic(long topicId) {
+        repository.getAllCommentsOfATopic(topicId, this);
+        return allCommentsOfATopic;
+    }
 
+    @Override
+    public void topicLiveDataChangeListener(LiveData<List<CommentWithUser>> commentsOfATopic) {
+        allCommentsOfATopic = commentsOfATopic;
+    }
 }

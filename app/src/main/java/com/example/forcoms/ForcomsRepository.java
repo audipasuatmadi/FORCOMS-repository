@@ -6,10 +6,12 @@ import android.os.AsyncTask;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.forcoms.commententity.CommentDao;
 import com.example.forcoms.commententity.CommentData;
+import com.example.forcoms.commententity.CommentOfTopicListener;
 import com.example.forcoms.commententity.CommentWithUser;
 import com.example.forcoms.sharedpreferences.UserDataPreference;
 import com.example.forcoms.topicentity.AddTopicListener;
@@ -39,6 +41,32 @@ public class ForcomsRepository {
 
     public void insertCommentData(CommentData commentData) {
         new InsertCommentDataAsync(commentDao).execute(commentData);
+    }
+
+    public void getAllCommentsOfATopic(long topicId, AndroidViewModel viewModel) {
+        new GetCommentsOfATopicAsync(commentDao, viewModel).execute(topicId);
+    }
+
+    private static class GetCommentsOfATopicAsync extends AsyncTask<Long, Void, LiveData<List<CommentWithUser>>> {
+        private final CommentDao asyncTaskDao;
+        private final CommentOfTopicListener callback;
+
+        GetCommentsOfATopicAsync(CommentDao commentDao, AndroidViewModel androidViewModel) {
+            asyncTaskDao = commentDao;
+            callback = (CommentOfTopicListener) androidViewModel;
+        }
+
+        @Override
+        protected LiveData<List<CommentWithUser>> doInBackground(Long... topicId) {
+            return asyncTaskDao.getAllComments(topicId[0]);
+        }
+
+
+        @Override
+        protected void onPostExecute(LiveData<List<CommentWithUser>> listLiveData) {
+            super.onPostExecute(listLiveData);
+            callback.topicLiveDataChangeListener(listLiveData);
+        }
     }
 
     private static class InsertCommentDataAsync extends AsyncTask<CommentData, Void, Boolean> {
