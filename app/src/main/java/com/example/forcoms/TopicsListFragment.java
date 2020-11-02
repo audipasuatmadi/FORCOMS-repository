@@ -48,7 +48,7 @@ public class TopicsListFragment extends Fragment {
         NavController navController = Navigation.findNavController(view);
 
         RecyclerView recyclerView = view.findViewById(R.id.topic_lists_recycler_view);
-        final TopicAdapter topicAdapter = new TopicAdapter(this.getContext());
+        final TopicAdapter topicAdapter = new TopicAdapter(this.getContext(), view);
 
         UserDataPreference userDataPreference = new UserDataPreference(requireActivity());
 

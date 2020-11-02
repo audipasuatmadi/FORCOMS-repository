@@ -20,10 +20,7 @@ import android.widget.Toast;
 import com.example.forcoms.userentity.UserData;
 import com.example.forcoms.userentity.UserViewModel;
 
-public class Change_username extends Fragment {
-
-    public Change_username() {
-    }
+public class ChangeUsernameFragment extends Fragment implements ForcomsRepository.iGetChangeUserDataFeedback {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,26 +43,23 @@ public class Change_username extends Fragment {
         currentView=view;
         buttonChange.setOnClickListener(view1->{
             String newUsernameValue = newUsername.getText().toString();
-            String confirmNewUsernameValue = oldUsername.getText().toString();
 
             if (!TextUtils.isEmpty(newUsernameValue.trim())){
-                if (newUsernameValue.equals(confirmNewUsernameValue)){
-                    String oldUsernameValue = oldUsername.getText().toString();
-                    UserData loggedInUser = userViewModel.getLoggedInUser();
+                String oldUsernameValue = oldUsername.getText().toString();
+                UserData loggedInUser = userViewModel.getLoggedInUser();
 
-                    if (oldUsernameValue.equals(loggedInUser.getUsername())) {
-                        loggedInUser.setUsername(newUsernameValue);
-                        userViewModel.updateUserData(loggedInUser, this);
-                    } else {
-                        Toast.makeText(this.getContext(), "username lama tidak benar", Toast.LENGTH_SHORT).show();
-                    }
-
+                if (oldUsernameValue.equals(loggedInUser.getUsername())) {
+                    loggedInUser.setUsername(newUsernameValue);
+                    userViewModel.updateUserData(loggedInUser, this);
                 } else {
-                    Toast.makeText(this.getContext(), "username baru tidak match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.getContext(), "username lama tidak benar", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Toast.makeText(this.getContext(), "username tidak boleh kosong", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     @Override
     public void onUserDataChange(boolean isCompleted) {
         if (isCompleted) {

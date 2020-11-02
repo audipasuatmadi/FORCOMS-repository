@@ -3,13 +3,16 @@ package com.example.forcoms;
 import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
+import com.example.forcoms.commententity.CommentDao;
+import com.example.forcoms.commententity.CommentData;
+import com.example.forcoms.commententity.CommentWithUser;
 import com.example.forcoms.sharedpreferences.UserDataPreference;
+import com.example.forcoms.topicentity.AddTopicListener;
 import com.example.forcoms.topicentity.TopicDao;
 import com.example.forcoms.topicentity.TopicData;
 import com.example.forcoms.topicentity.TopicWithUser;
@@ -21,38 +24,64 @@ import java.util.List;
 public class ForcomsRepository {
     private final UserDao userDao;
     private final TopicDao topicDao;
+    private final CommentDao commentDao;
     private final LiveData<List<TopicWithUser>> allTopics;
+    private LiveData<List<CommentWithUser>> allCommentsOfATopic;
 
     public ForcomsRepository(Application application) {
         ForcomsDB forcomsDB = ForcomsDB.getDatabase(application);
         userDao = forcomsDB.userDao();
         topicDao = forcomsDB.topicDao();
+        commentDao = forcomsDB.commentDao();
 
         allTopics = topicDao.getAllTopics();
     }
 
+    public void insertCommentData(CommentData commentData) {
+        new InsertCommentDataAsync(commentDao).execute(commentData);
+    }
+
+    private static class InsertCommentDataAsync extends AsyncTask<CommentData, Void, Boolean> {
+        private final CommentDao asyncTaskDao;
+
+        InsertCommentDataAsync(CommentDao commentDao) {
+            asyncTaskDao = commentDao;
+        }
+
+        @Override
+        protected Boolean doInBackground(CommentData... commentData) {
+            asyncTaskDao.addComment(commentData[0]);
+            return true;
+        }
+    }
 
 
-
-    public void insertTopicData(TopicData topicData) {
-        new InsertTopicDataAsync(topicDao).execute(topicData);
+    public void insertTopicData(TopicData topicData, Fragment fragment) {
+        new InsertTopicDataAsync(topicDao, fragment).execute(topicData);
     }
 
     public LiveData<List<TopicWithUser>> getAllTopics() {
         return this.allTopics;
     }
 
-    private static class InsertTopicDataAsync extends AsyncTask<TopicData, Void, Boolean> {
+    private static class InsertTopicDataAsync extends AsyncTask<TopicData, Void, Long> {
         private final TopicDao asyncTaskDao;
+        private final AddTopicListener callback;
 
-        InsertTopicDataAsync(TopicDao topicDao) {
+        InsertTopicDataAsync(TopicDao topicDao, Fragment fragment) {
             asyncTaskDao = topicDao;
+            callback = (AddTopicListener) fragment;
         }
 
         @Override
-        protected Boolean doInBackground(TopicData... topicData) {
-            asyncTaskDao.addTopic(topicData[0]);
-            return true;
+        protected Long doInBackground(TopicData... topicData) {
+            return asyncTaskDao.addTopic(topicData[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Long aLong) {
+            super.onPostExecute(aLong);
+            callback.onAddTopic(aLong);
         }
     }
 

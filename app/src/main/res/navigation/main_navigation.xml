@@ -37,7 +37,7 @@
         tools:layout="@layout/fragment_change_password2" />
     <fragment
         android:id="@+id/change_username"
-        android:name="com.example.forcoms.Change_username"
+        android:name="com.example.forcoms.ChangeUsernameFragment"
         android:label="fragment_change_username"
         tools:layout="@layout/fragment_change_username" />
     <fragment
@@ -45,4 +45,9 @@
         android:name="com.example.forcoms.topicentity.AddTopicFragment"
         android:label="fragment_add_topic"
         tools:layout="@layout/fragment_add_topic" />
+    <fragment
+        android:id="@+id/commentsListFragment"
+        android:name="com.example.forcoms.CommentsListFragment"
+        android:label="fragment_comments_list"
+        tools:layout="@layout/fragment_comments_list" />
 </navigation>

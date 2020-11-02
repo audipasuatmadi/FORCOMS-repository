@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface TopicDao {
     @Insert
-    void addTopic(TopicData topicData);
+    long addTopic(TopicData topicData);
 
     @Transaction
     @Query("SELECT * FROM topics")
