@@ -1,6 +1,7 @@
 package com.example.forcoms.topicentity;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewHolder> {
             holder.creator.setText(currentTopic.userData.getUsername());
 
             holder.container.setOnClickListener(view -> {
-                navController.navigate(R.id.commentsListFragment);
+                Bundle bundle = new Bundle();
+                bundle.putLong("TOPIC_ID", currentTopic.topicData.getId());
+                navController.navigate(R.id.commentsListFragment, bundle);
             });
 
         }
