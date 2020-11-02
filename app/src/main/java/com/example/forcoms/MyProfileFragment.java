@@ -41,9 +41,14 @@ public class MyProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
         Button changePasswordButton=view.findViewById(R.id.logout_edit);
+        Button changeUsernameButton = view.findViewById(R.id.logout_edit_username);
 
         changePasswordButton.setOnClickListener(view1->{
             navController.navigate(R.id.changePasswordFragment);
+        });
+
+        changeUsernameButton.setOnClickListener(view1 -> {
+            navController.navigate(R.id.change_username);
         });
 
         UserDataPreference userDataPreference = new UserDataPreference(this.getContext());
