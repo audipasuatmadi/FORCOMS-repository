@@ -49,5 +49,15 @@
         android:id="@+id/commentsListFragment"
         android:name="com.example.forcoms.CommentsListFragment"
         android:label="fragment_comments_list"
-        tools:layout="@layout/fragment_comments_list" />
+        tools:layout="@layout/fragment_comments_list">
+<!--        <argument-->
+<!--            android:name="topicId"-->
+<!--            app:argType="float"-->
+<!--            android:defaultValue="1"/>-->
+    </fragment>
+    <fragment
+        android:id="@+id/addCommentFragment"
+        android:name="com.example.forcoms.commententity.AddCommentFragment"
+        android:label="fragment_add_comment"
+        tools:layout="@layout/fragment_add_comment" />
 </navigation>
