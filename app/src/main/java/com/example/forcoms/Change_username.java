@@ -54,7 +54,7 @@ public class Change_username extends Fragment {
                     UserData loggedInUser = userViewModel.getLoggedInUser();
 
                     if (oldUsernameValue.equals(loggedInUser.getUsername())) {
-                        loggedInUser.setPassword(newUsernameValue);
+                        loggedInUser.setUsername(newUsernameValue);
                         userViewModel.updateUserData(loggedInUser, this);
                     } else {
                         Toast.makeText(this.getContext(), "username lama tidak benar", Toast.LENGTH_SHORT).show();
