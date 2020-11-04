@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.forcoms.R;
+import com.example.forcoms.sharedpreferences.UserDataPreference;
 
 import java.util.List;
 
@@ -17,9 +19,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
     private final LayoutInflater layoutInflater;
     private List<CommentWithUser> commentsInATopic;
+    private UserDataPreference userDataPreference;
+    private NavController navController;
 
-    public CommentAdapter(Context context) {
+    public CommentAdapter(Context context,View view) {
         this.layoutInflater = LayoutInflater.from(context);
+        this.userDataPreference = new UserDataPreference(context);
+        this.navController = Navigation.findNavController(view);
     }
 
     @NonNull
@@ -35,6 +41,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
             CommentWithUser currentComment = commentsInATopic.get(position);
             holder.content.setText(currentComment.commentData.getContent());
             holder.creator.setText(currentComment.userData.getUsername());
+            holder.cardView.setOnClickListener(view->{
+                if (currentComment.userData.getId() == userDataPreference.getLoggedId()) {
+                    navController.navigate(R.id.editCommentFragment);
+                }
+            });
         }
     }
 
