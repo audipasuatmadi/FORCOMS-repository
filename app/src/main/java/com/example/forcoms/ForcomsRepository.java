@@ -18,6 +18,7 @@ import com.example.forcoms.topicentity.AddTopicListener;
 import com.example.forcoms.topicentity.TopicDao;
 import com.example.forcoms.topicentity.TopicData;
 import com.example.forcoms.topicentity.TopicWithUser;
+import com.example.forcoms.userentity.AddUserDataListener;
 import com.example.forcoms.userentity.UserDao;
 import com.example.forcoms.userentity.UserData;
 
@@ -122,8 +123,8 @@ public class ForcomsRepository {
         void onUserDataChange(boolean isCompleted);
     }
 
-    public void insertUserData(UserData userData, Context context) {
-        new insertAsyncTask(userDao, context).execute(userData);
+    public void insertUserData(UserData userData, Fragment fragment) {
+        new insertAsyncTask(userDao, fragment).execute(userData);
     }
 
     public void getUserDataWithCredentials(String username, String password, Fragment fragment) {
@@ -209,21 +210,24 @@ public class ForcomsRepository {
     }
 
 
-    private static class insertAsyncTask extends AsyncTask<UserData, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<UserData, Void, Long> {
         private final UserDao asyncTaskDao;
-        private final Context context;
+        private final AddUserDataListener callback;
 
-        insertAsyncTask(UserDao userDao, Context context) {
+        insertAsyncTask(UserDao userDao, Fragment fragment) {
             asyncTaskDao = userDao;
-            this.context = context;
+            this.callback = (AddUserDataListener) fragment;
         }
 
         @Override
-        protected Void doInBackground(UserData... noteEntities) {
-            long userId = asyncTaskDao.addUserData(noteEntities[0]);
-            UserDataPreference userDataPreference = new UserDataPreference(this.context);
-            userDataPreference.setLoggedInId(userId);
-            return null;
+        protected Long doInBackground(UserData... noteEntities) {
+            return asyncTaskDao.addUserData(noteEntities[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Long aLong) {
+            super.onPostExecute(aLong);
+            callback.onUserDataAdded(aLong);
         }
     }
 

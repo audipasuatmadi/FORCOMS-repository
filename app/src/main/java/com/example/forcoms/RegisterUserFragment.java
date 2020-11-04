@@ -23,16 +23,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.forcoms.sharedpreferences.UserDataPreference;
+import com.example.forcoms.userentity.AddUserDataListener;
 import com.example.forcoms.userentity.UserData;
 import com.example.forcoms.userentity.UserViewModel;
 
 
-public class RegisterUserFragment extends Fragment {
+public class RegisterUserFragment extends Fragment implements AddUserDataListener {
     public RegisterUserFragment() {
         // Required empty public constructor
     }
 
     private NavController navController;
+    private UserData processingUserData;
+    private UserViewModel userViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class RegisterUserFragment extends Fragment {
         EditText passwordEditText = view.findViewById(R.id.register_input_password);
         navController = Navigation.findNavController(view);
 
-        UserViewModel userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         usernameEditText.setFilters(new InputFilter[] {
                 new InputFilter.AllCaps() {
@@ -66,31 +69,39 @@ public class RegisterUserFragment extends Fragment {
                 }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String usernameValue = usernameEditText.getText().toString();
-                String passwordValue = passwordEditText.getText().toString();
+        Fragment fragment = this;
 
-                if (TextUtils.isEmpty(usernameValue.trim()) || TextUtils.isEmpty(passwordValue.trim())) {
-                    Toast.makeText(view.getContext(), "username dan password tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        registerButton.setOnClickListener(view12 -> {
+            String usernameValue = usernameEditText.getText().toString();
+            String passwordValue = passwordEditText.getText().toString();
 
-                UserData newUserData = new UserData(usernameValue, passwordValue);
-
-                userViewModel.addUserData(newUserData, view.getContext());
-                Toast.makeText(view.getContext(), "selamat bergabung, " + usernameValue + "!", Toast.LENGTH_SHORT).show();
-
-
-                navController.popBackStack();
-
+            if (TextUtils.isEmpty(usernameValue.trim()) || TextUtils.isEmpty(passwordValue.trim())) {
+                Toast.makeText(view12.getContext(), "username dan password tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            processingUserData = new UserData(usernameValue, passwordValue);
+
+            userViewModel.addUserData(processingUserData, fragment);
         });
 
         gotoLoginPageButton.setOnClickListener(view1 -> {
             navController.popBackStack();
             navController.navigate(R.id.loginFragment);
         });
+    }
+
+    @Override
+    public void onUserDataAdded(long userId) {
+        UserDataPreference userDataPreference = new UserDataPreference(this.getContext());
+        userDataPreference.setIsLoggedIn(true);
+        userDataPreference.setLoggedInId(userId);
+
+        processingUserData.setId(userId);
+        userViewModel.setLoggedInUser(processingUserData);
+
+        Toast.makeText(requireContext(), "Selamat bergabung " + processingUserData.getUsername() + "!", Toast.LENGTH_SHORT).show();
+
+        navController.popBackStack();
     }
 }

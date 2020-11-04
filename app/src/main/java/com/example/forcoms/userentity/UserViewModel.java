@@ -36,8 +36,8 @@ public class UserViewModel extends AndroidViewModel {
         forcomsRepository.getUserDataWithCredentials(username, password, fragment);
     }
 
-    public void addUserData(UserData userData, Context context) {
-        forcomsRepository.insertUserData(userData, context);
+    public void addUserData(UserData userData, Fragment fragment) {
+        forcomsRepository.insertUserData(userData, fragment);
     }
 
     public void getUserDataWithId(long id, Context context) {
