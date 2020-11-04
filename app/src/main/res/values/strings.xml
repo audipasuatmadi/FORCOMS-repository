@@ -41,4 +41,5 @@
     <string name="start_topic">Buka Topik</string>
     <string name="placeholder_comment_content">Komentar Komentar Komentar Komentar Komentar Komentar Komentar Komentar Komentar Komentar Komentar Komentar.</string>
     <string name="placeholder_comment_creator">Nama Pemberi Komentar</string>
+    <string name="edit_comment">Edit Komentar</string>
 </resources>
