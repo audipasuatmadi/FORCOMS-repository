@@ -42,7 +42,7 @@ public class CommentsListFragment extends Fragment implements CommentOfTopicList
         Button gotoAddCommentNav = view.findViewById(R.id.comments_list_button);
 
         RecyclerView recyclerView = view.findViewById(R.id.comments_list_recycler_view);
-        commentAdapter = new CommentAdapter(this.getContext());
+        commentAdapter = new CommentAdapter(this.getContext(),view);
         recyclerView.setAdapter(commentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

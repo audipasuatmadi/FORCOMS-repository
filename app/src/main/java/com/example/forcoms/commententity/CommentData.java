@@ -1,11 +1,14 @@
 package com.example.forcoms.commententity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity (tableName = "comments")
-public class CommentData {
+public class CommentData implements Parcelable {
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo(name = "id")
     private long id;
@@ -55,5 +58,15 @@ public class CommentData {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }
