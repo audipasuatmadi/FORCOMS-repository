@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EditCommentFragment"
+    tools:context=".commententity.EditCommentFragment"
     android:padding="20dp">
 
     <EditText
@@ -20,5 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/edit_comment"/>
+
+    <Button
+        android:id="@+id/edit_comment_delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red"
+        android:text="@string/button_delete"/>
 
 </LinearLayout>

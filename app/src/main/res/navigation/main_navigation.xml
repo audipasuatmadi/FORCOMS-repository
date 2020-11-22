@@ -62,12 +62,12 @@
         tools:layout="@layout/fragment_add_comment" />
     <fragment
         android:id="@+id/editCommentFragment"
-        android:name="com.example.forcoms.EditCommentFragment"
+        android:name="com.example.forcoms.commententity.EditCommentFragment"
         android:label="fragment_edit_comment"
         tools:layout="@layout/fragment_edit_comment" />
     <fragment
         android:id="@+id/deleteCommentFragment"
-        android:name="com.example.forcoms.DeleteCommentFragment"
+        android:name="com.example.forcoms.commententity.DeleteCommentFragment"
         android:label="fragment_delete_comment"
         tools:layout="@layout/fragment_delete_comment" />
 </navigation>

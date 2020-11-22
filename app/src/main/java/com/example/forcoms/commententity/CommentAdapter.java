@@ -2,6 +2,7 @@ package com.example.forcoms.commententity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
                 if (currentComment.userData.getId() == userDataPreference.getLoggedId()) {
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("CONTENT",currentComment.commentData);
-                    navController.navigate(R.id.editCommentFragment,bundle);
+                    navController.navigate(R.id.editCommentFragment, bundle);
                 }
             });
         }

@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface CommentDao {
     @Transaction
     @Query("SELECT * FROM comments WHERE topic_id=:topicId")
     LiveData<List<CommentWithUser>> getAllComments(long topicId);
+
+    @Update
+    void updateData(CommentData commentData);
 }

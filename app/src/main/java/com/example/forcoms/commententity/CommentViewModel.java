@@ -38,6 +38,10 @@ public class CommentViewModel extends AndroidViewModel implements CommentOfTopic
         return this.topicId;
     }
 
+    public void updateComment(CommentData commentData) {
+        repository.updateComment(commentData);
+    }
+
     @Override
     public void topicLiveDataChangeListener(LiveData<List<CommentWithUser>> commentsOfATopic) {
         allCommentsOfATopic = commentsOfATopic;

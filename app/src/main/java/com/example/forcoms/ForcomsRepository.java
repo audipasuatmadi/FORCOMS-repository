@@ -48,6 +48,25 @@ public class ForcomsRepository {
         new GetCommentsOfATopicAsync(commentDao, viewModel).execute(topicId);
     }
 
+    public void updateComment(CommentData commentData) {
+        new UpdateCommentAsync(commentDao).execute(commentData);
+    }
+
+    private static class UpdateCommentAsync extends AsyncTask<CommentData, Void, Void> {
+        private final CommentDao asyncTaskDao;
+
+        UpdateCommentAsync(CommentDao commentDao) {
+            asyncTaskDao = commentDao;
+        }
+
+        @Override
+        protected Void doInBackground(CommentData... commentData) {
+            asyncTaskDao.updateData(commentData[0]);
+            return null;
+        }
+    }
+
+
     private static class GetCommentsOfATopicAsync extends AsyncTask<Long, Void, LiveData<List<CommentWithUser>>> {
         private final CommentDao asyncTaskDao;
         private final CommentOfTopicListener callback;
