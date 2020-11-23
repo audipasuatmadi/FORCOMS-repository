@@ -70,4 +70,9 @@
         android:name="com.example.forcoms.commententity.DeleteCommentFragment"
         android:label="fragment_delete_comment"
         tools:layout="@layout/fragment_delete_comment" />
+    <fragment
+        android:id="@+id/editDeleteTopicFragment"
+        android:name="com.example.forcoms.EditDeleteTopicFragment"
+        android:label="fragment_edit_delete_topic"
+        tools:layout="@layout/fragment_edit_delete_topic" />
 </navigation>
