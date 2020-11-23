@@ -29,6 +29,7 @@ import com.example.forcoms.userentity.UserViewModel;
 public class MyProfileFragment extends Fragment {
 
     NavController navController;
+    private boolean visited = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,12 +68,16 @@ public class MyProfileFragment extends Fragment {
             });
         } else {
             gotoLoginFragment();
+            this.visited = true;
         }
     }
 
     private void gotoLoginFragment() {
-        navController.popBackStack();
-        navController.navigate(R.id.loginFragment);
+        if (this.visited == true) {
+            navController.popBackStack();
+        } else {
+            navController.navigate(R.id.loginFragment);
+        }
     }
 
     private void inflateUserDataToViews(UserData userData, View view) {

@@ -14,6 +14,7 @@
         android:hint="@string/username_old"
         android:layout_marginStart="24dp"
         android:layout_marginTop="160dp"
+        android:background="@color/WhiteSmoke"
         android:layout_marginEnd="24dp"/>
 
     <EditText
@@ -23,6 +24,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="216dp"
         android:layout_marginEnd="24dp"
+        android:background="@color/WhiteSmoke"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/username_new" />

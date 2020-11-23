@@ -27,6 +27,7 @@ import java.util.List;
 
 public class TopicsSubscriptionsFragment extends Fragment implements TopicUserJoinedListener {
     private TopicAdapter topicAdapter;
+    private boolean visited = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,8 +42,15 @@ public class TopicsSubscriptionsFragment extends Fragment implements TopicUserJo
 
         UserDataPreference userDataPreference = new UserDataPreference(this.requireActivity());
         if (!userDataPreference.isLoggedIn()) {
-            navController.popBackStack();
-            navController.navigate(R.id.loginFragment);
+            if (this.visited == true) {
+                navController.popBackStack();
+            } else {
+                navController.navigate(R.id.loginFragment);
+            }
+
+            this.visited = true;
+
+            return;
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.subscriptions_list_recycler_view);

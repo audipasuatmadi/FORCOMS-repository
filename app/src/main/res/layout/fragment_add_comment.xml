@@ -18,12 +18,15 @@
         android:layout_height="wrap_content"
         android:lines="10"
         android:gravity="top|start"
+        android:background="@color/WhiteSmoke"
         android:inputType="text|textMultiLine"/>
 
     <Button
         android:id="@+id/comment_submit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/blueRoyal"
+        android:backgroundTint="@color/white"
         android:text="Tambah Komentar"/>
 
 

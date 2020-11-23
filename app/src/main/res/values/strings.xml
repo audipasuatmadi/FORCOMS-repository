@@ -43,4 +43,7 @@
     <string name="placeholder_comment_creator">Nama Pemberi Komentar</string>
     <string name="edit_comment">Edit Komentar</string>
     <string name="button_delete">delete</string>
+    <string name="konten_komentar">Konten Komentar</string>
+    <string name="judul_topik">Judul Topik</string>
+    <string name="edit_judul_topik">Edit Judul Topik</string>
 </resources>
