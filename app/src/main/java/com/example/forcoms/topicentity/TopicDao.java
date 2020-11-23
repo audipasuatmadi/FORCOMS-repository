@@ -19,6 +19,10 @@ public interface TopicDao {
     @Query("SELECT * FROM topics ORDER BY id DESC")
     LiveData<List<TopicWithUser>> getAllTopics();
 
+    @Transaction
+    @Query("SELECT DISTINCT * FROM topics JOIN comments ON comments.user_id=:userId")
+    LiveData<List<TopicWithUser>> getTopicsUserJoined(long userId);
+
     @Update
     void updateTopic(TopicData topicData);
 

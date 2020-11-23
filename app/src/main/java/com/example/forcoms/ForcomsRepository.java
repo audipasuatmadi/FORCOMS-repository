@@ -17,6 +17,7 @@ import com.example.forcoms.sharedpreferences.UserDataPreference;
 import com.example.forcoms.topicentity.AddTopicListener;
 import com.example.forcoms.topicentity.TopicDao;
 import com.example.forcoms.topicentity.TopicData;
+import com.example.forcoms.topicentity.TopicUserJoinedListener;
 import com.example.forcoms.topicentity.TopicWithUser;
 import com.example.forcoms.userentity.AddUserDataListener;
 import com.example.forcoms.userentity.UserDao;
@@ -136,6 +137,32 @@ public class ForcomsRepository {
 
     public void deleteTopic(TopicData topicData) {
         new DeleteTopicAsync(topicDao).execute(topicData);
+    }
+
+    public void getTopicsUserJoined(long userId, AndroidViewModel androidViewModel) {
+        new GetTopicsUserJoinedAsync(topicDao, androidViewModel).execute(userId);
+    }
+
+    private static class GetTopicsUserJoinedAsync extends AsyncTask<Long, Void, LiveData<List<TopicWithUser>>> {
+        private final TopicDao asyncTaskDao;
+        private final TopicUserJoinedListener callback;
+
+        GetTopicsUserJoinedAsync(TopicDao topicDao, AndroidViewModel androidViewModel) {
+            asyncTaskDao = topicDao;
+            callback = (TopicUserJoinedListener) androidViewModel;
+        }
+
+        @Override
+        protected LiveData<List<TopicWithUser>> doInBackground(Long... topicId) {
+            return asyncTaskDao.getTopicsUserJoined(topicId[0]);
+        }
+
+
+        @Override
+        protected void onPostExecute(LiveData<List<TopicWithUser>> listLiveData) {
+            super.onPostExecute(listLiveData);
+            callback.onGetTopicsUserJoined(listLiveData);
+        }
     }
 
     private static class DeleteTopicAsync extends AsyncTask<TopicData, Void, Void> {
