@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:paddingStart="150dp"
         android:paddingEnd="150dp"
-        android:src="@drawable/forcoms_logo_bigger_better"/>
+        android:src="@drawable/forcoms_logo_bigger_better"
+        android:contentDescription="@string/content_description_splash_screen" />
 
 </FrameLayout>
