@@ -11,9 +11,11 @@ import com.example.forcoms.ForcomsRepository;
 
 import java.util.List;
 
-public class TopicViewModel extends AndroidViewModel {
+public class TopicViewModel extends AndroidViewModel implements TopicUserJoinedListener {
     private final ForcomsRepository forcomsRepository;
     private final LiveData<List<TopicWithUser>> allTopics;
+    private LiveData<List<TopicWithUser>> topicsUserJoined;
+    private TopicUserJoinedListener callback;
 
     public TopicViewModel(@NonNull Application application) {
         super(application);
@@ -29,6 +31,11 @@ public class TopicViewModel extends AndroidViewModel {
         return allTopics;
     }
 
+    public void getTopicsUserJoined(long userId, Fragment fragment) {
+        forcomsRepository.getTopicsUserJoined(userId, this);
+        this.callback = (TopicUserJoinedListener) fragment;
+    }
+
     public void updateTopic(TopicData topicData) {
         forcomsRepository.updateTopic(topicData);
     }
@@ -37,4 +44,10 @@ public class TopicViewModel extends AndroidViewModel {
         forcomsRepository.deleteTopic(topicData);
     }
 
+
+    @Override
+    public void onGetTopicsUserJoined(LiveData<List<TopicWithUser>> topicsUserJoined) {
+        this.topicsUserJoined = topicsUserJoined;
+        callback.onGetTopicsUserJoined(topicsUserJoined);
+    }
 }
