@@ -10,6 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/add_topic_title"
         android:text="@string/title_topic"/>
 
     <EditText
@@ -22,6 +23,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/add_topic_comment"
         android:text="@string/question_topic"/>
     
     <EditText

@@ -10,7 +10,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/question_topic"/>
+        android:text="@string/question_topic"
+        android:labelFor="@+id/comment_add_comment_edit_ext"/>
 
     <EditText
         android:id="@+id/comment_add_comment_edit_ext"

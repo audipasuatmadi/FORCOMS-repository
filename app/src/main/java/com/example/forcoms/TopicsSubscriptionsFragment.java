@@ -42,7 +42,7 @@ public class TopicsSubscriptionsFragment extends Fragment implements TopicUserJo
 
         UserDataPreference userDataPreference = new UserDataPreference(this.requireActivity());
         if (!userDataPreference.isLoggedIn()) {
-            if (this.visited == true) {
+            if (this.visited) {
                 navController.popBackStack();
             } else {
                 navController.navigate(R.id.loginFragment);
