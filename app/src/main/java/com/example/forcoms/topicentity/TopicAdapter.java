@@ -56,7 +56,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewHolder> {
                         builder.setPositiveButton("Edit/Delete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("CONTENT", currentTopic.topicData);
+                                navController.navigate(R.id.editDeleteTopicFragment, bundle);
                             }
                         });
                         builder.setNegativeButton("Lihat Topik", new DialogInterface.OnClickListener() {

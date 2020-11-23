@@ -29,4 +29,12 @@ public class TopicViewModel extends AndroidViewModel {
         return allTopics;
     }
 
+    public void updateTopic(TopicData topicData) {
+        forcomsRepository.updateTopic(topicData);
+    }
+
+    public void deleteTopic(TopicData topicData) {
+        forcomsRepository.deleteTopic(topicData);
+    }
+
 }

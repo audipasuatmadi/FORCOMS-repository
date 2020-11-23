@@ -130,6 +130,43 @@ public class ForcomsRepository {
         return this.allTopics;
     }
 
+    public void updateTopic(TopicData topicData) {
+        new UpdateTopicAsync(topicDao).execute(topicData);
+    }
+
+    public void deleteTopic(TopicData topicData) {
+        new DeleteTopicAsync(topicDao).execute(topicData);
+    }
+
+    private static class DeleteTopicAsync extends AsyncTask<TopicData, Void, Void> {
+        private final TopicDao asyncTaskDao;
+
+        DeleteTopicAsync(TopicDao topicDao) {
+            asyncTaskDao = topicDao;
+        }
+
+        @Override
+        protected Void doInBackground(TopicData... topicData) {
+            asyncTaskDao.deleteTopic(topicData[0]);
+            return null;
+        }
+    }
+
+
+    private static class UpdateTopicAsync extends AsyncTask<TopicData, Void, Void> {
+        private final TopicDao asyncTaskDao;
+
+        UpdateTopicAsync(TopicDao topicDao) {
+            asyncTaskDao = topicDao;
+        }
+
+        @Override
+        protected Void doInBackground(TopicData... topicData) {
+            asyncTaskDao.updateTopic(topicData[0]);
+            return null;
+        }
+    }
+
     private static class InsertTopicDataAsync extends AsyncTask<TopicData, Void, Long> {
         private final TopicDao asyncTaskDao;
         private final AddTopicListener callback;
