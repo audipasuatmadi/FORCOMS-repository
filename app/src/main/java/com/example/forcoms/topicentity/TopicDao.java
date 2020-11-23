@@ -20,7 +20,8 @@ public interface TopicDao {
     LiveData<List<TopicWithUser>> getAllTopics();
 
     @Transaction
-    @Query("SELECT DISTINCT * FROM topics JOIN comments ON comments.user_id=:userId")
+//    @Query("SELECT DISTINCT * FROM topics JOIN comments ON comments.topic_id=topic_id WHERE comments.user_id=:userId")
+    @Query("SELECT DISTINCT topics.id, topics.title, topics.user_id FROM topics INNER JOIN comments ON topics.id=comments.topic_id WHERE comments.user_id=:userId")
     LiveData<List<TopicWithUser>> getTopicsUserJoined(long userId);
 
     @Update
