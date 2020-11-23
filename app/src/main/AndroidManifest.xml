@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FORCOMS">
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+        <activity
             android:name=".ui.login.LoginTry"
-            android:label="@string/title_activity_login_try"></activity>
+            android:label="@string/title_activity_login_try" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/FORCOMS.NoActionBar">
