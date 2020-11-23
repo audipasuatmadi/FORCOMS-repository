@@ -26,7 +26,7 @@ import com.example.forcoms.R;
 import com.example.forcoms.ui.login.LoginViewModel;
 import com.example.forcoms.ui.login.LoginViewModelFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginTry extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
 
