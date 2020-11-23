@@ -14,6 +14,6 @@ public interface TopicDao {
     long addTopic(TopicData topicData);
 
     @Transaction
-    @Query("SELECT * FROM topics")
+    @Query("SELECT * FROM topics ORDER BY id DESC")
     LiveData<List<TopicWithUser>> getAllTopics();
 }

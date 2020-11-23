@@ -1,6 +1,8 @@
 package com.example.forcoms.topicentity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.forcoms.R;
+import com.example.forcoms.sharedpreferences.UserDataPreference;
 
 import java.util.List;
 
@@ -19,10 +22,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewHolder> {
     private final LayoutInflater layoutInflater;
     private final NavController navController;
     private List<TopicWithUser> topics;
+    private Context context;
+    private UserDataPreference userDataPreference;
 
     public TopicAdapter(Context context, View view) {
         this.layoutInflater = LayoutInflater.from(context);
         navController = Navigation.findNavController(view);
+        this.userDataPreference = new UserDataPreference(view.getContext());
+        this.context = context;
     }
 
     @NonNull
@@ -40,9 +47,38 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicViewHolder> {
             holder.creator.setText(currentTopic.userData.getUsername());
 
             holder.container.setOnClickListener(view -> {
-                Bundle bundle = new Bundle();
-                bundle.putLong("TOPIC_ID", currentTopic.topicData.getId());
-                navController.navigate(R.id.commentsListFragment, bundle);
+
+                if (this.userDataPreference.isLoggedIn()) {
+                    if (currentTopic.userData.getId() == this.userDataPreference.getLoggedId()) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+                        builder.setTitle("Menu pemilik topik");
+                        builder.setMessage("Apakah anda ingin melihat topik anda atau ingin melakukan edit/delete?");
+                        builder.setPositiveButton("Edit/Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                        builder.setNegativeButton("Lihat Topik", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Bundle bundle = new Bundle();
+                                bundle.putLong("TOPIC_ID", currentTopic.topicData.getId());
+                                navController.navigate(R.id.commentsListFragment, bundle);
+                            }
+                        });
+
+                        builder.create().show();
+                    } else {
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("TOPIC_ID", currentTopic.topicData.getId());
+                        navController.navigate(R.id.commentsListFragment, bundle);
+                    }
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("TOPIC_ID", currentTopic.topicData.getId());
+                    navController.navigate(R.id.commentsListFragment, bundle);
+                }
             });
 
         }
