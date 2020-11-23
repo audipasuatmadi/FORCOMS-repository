@@ -33,46 +33,42 @@
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.example.forcoms.ChangePasswordFragment"
-        android:label="fragment_change_password2"
+        android:label="Ganti Password"
         tools:layout="@layout/fragment_change_password2" />
     <fragment
         android:id="@+id/change_username"
         android:name="com.example.forcoms.ChangeUsernameFragment"
-        android:label="fragment_change_username"
+        android:label="Ganti Username"
         tools:layout="@layout/fragment_change_username" />
     <fragment
         android:id="@+id/addTopicFragment"
         android:name="com.example.forcoms.topicentity.AddTopicFragment"
-        android:label="fragment_add_topic"
+        android:label="Tambah Topik"
         tools:layout="@layout/fragment_add_topic" />
     <fragment
         android:id="@+id/commentsListFragment"
         android:name="com.example.forcoms.CommentsListFragment"
-        android:label="fragment_comments_list"
+        android:label="Daftar Komentar"
         tools:layout="@layout/fragment_comments_list">
-<!--        <argument-->
-<!--            android:name="topicId"-->
-<!--            app:argType="float"-->
-<!--            android:defaultValue="1"/>-->
     </fragment>
     <fragment
         android:id="@+id/addCommentFragment"
         android:name="com.example.forcoms.commententity.AddCommentFragment"
-        android:label="fragment_add_comment"
+        android:label="Tambah Komentar"
         tools:layout="@layout/fragment_add_comment" />
     <fragment
         android:id="@+id/editCommentFragment"
         android:name="com.example.forcoms.commententity.EditCommentFragment"
-        android:label="fragment_edit_comment"
+        android:label="Edit Komentar"
         tools:layout="@layout/fragment_edit_comment" />
     <fragment
         android:id="@+id/deleteCommentFragment"
         android:name="com.example.forcoms.commententity.DeleteCommentFragment"
-        android:label="fragment_delete_comment"
+        android:label="Hapus Komentar"
         tools:layout="@layout/fragment_delete_comment" />
     <fragment
         android:id="@+id/editDeleteTopicFragment"
         android:name="com.example.forcoms.EditDeleteTopicFragment"
-        android:label="fragment_edit_delete_topic"
+        android:label="Edit Topik"
         tools:layout="@layout/fragment_edit_delete_topic" />
 </navigation>

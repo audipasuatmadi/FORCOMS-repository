@@ -43,6 +43,9 @@ public class TopicsSubscriptionsFragment extends Fragment implements TopicUserJo
         if (!userDataPreference.isLoggedIn()) {
             navController.popBackStack();
             navController.navigate(R.id.loginFragment);
+
+            
+            return;
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.subscriptions_list_recycler_view);
