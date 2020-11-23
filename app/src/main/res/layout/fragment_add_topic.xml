@@ -15,7 +15,9 @@
     <EditText
         android:id="@+id/add_topic_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@color/WhiteSmoke"/>
     
     <TextView
         android:layout_width="match_parent"
@@ -28,12 +30,15 @@
         android:layout_height="wrap_content"
         android:lines="5"
         android:gravity="top|start"
-        android:inputType="text|textMultiLine"/>
+        android:inputType="text|textMultiLine"
+        android:background="@color/WhiteSmoke"/>
     
     <Button
         android:id="@+id/add_topic_submit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/blueRoyal"
+        android:backgroundTint="@color/white"
         android:text="@string/start_topic"/>
     
 

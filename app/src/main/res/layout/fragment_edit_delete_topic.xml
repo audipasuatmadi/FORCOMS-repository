@@ -7,10 +7,17 @@
     tools:context=".EditDeleteTopicFragment"
     android:padding="20dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/judul_topik"/>
+
     <EditText
         android:id="@+id/edit_topic_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/WhiteSmoke"
+        android:padding="5dp"
         android:gravity="top|start"
         android:inputType="text"/>
 
@@ -18,7 +25,9 @@
         android:id="@+id/edit_topic_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Judul Topik"/>
+        android:textColor="@color/blueRoyal"
+        android:backgroundTint="@color/white"
+        android:text="@string/edit_judul_topik"/>
 
     <Button
         android:id="@+id/edit_topic_delete_button"
