@@ -52,6 +52,24 @@ public class ForcomsRepository {
         new UpdateCommentAsync(commentDao).execute(commentData);
     }
 
+    public void deleteComment(CommentData commentData) {
+        new DeleteCommentAsync(commentDao).execute(commentData);
+    }
+
+    private static class DeleteCommentAsync extends AsyncTask<CommentData, Void, Void> {
+        private final CommentDao asyncTaskDao;
+
+        DeleteCommentAsync(CommentDao commentDao) {
+            asyncTaskDao = commentDao;
+        }
+
+        @Override
+        protected Void doInBackground(CommentData... commentData) {
+            asyncTaskDao.deleteData(commentData[0]);
+            return null;
+        }
+    }
+
     private static class UpdateCommentAsync extends AsyncTask<CommentData, Void, Void> {
         private final CommentDao asyncTaskDao;
 

@@ -42,6 +42,10 @@ public class CommentViewModel extends AndroidViewModel implements CommentOfTopic
         repository.updateComment(commentData);
     }
 
+    public void deleteComment(CommentData commentData) {
+        repository.deleteComment(commentData);
+    }
+
     @Override
     public void topicLiveDataChangeListener(LiveData<List<CommentWithUser>> commentsOfATopic) {
         allCommentsOfATopic = commentsOfATopic;
