@@ -2,6 +2,7 @@ package com.example.forcoms.commententity;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -20,4 +21,7 @@ public interface CommentDao {
 
     @Update
     void updateData(CommentData commentData);
+
+    @Delete
+    void deleteData(CommentData commentData);
 }

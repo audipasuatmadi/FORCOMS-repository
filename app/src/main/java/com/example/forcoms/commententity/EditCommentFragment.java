@@ -1,5 +1,7 @@
 package com.example.forcoms.commententity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.ContentView;
@@ -24,6 +26,8 @@ import com.example.forcoms.commententity.CommentData;
 
 public class EditCommentFragment extends Fragment {
 
+    CommentViewModel commentViewModel;
+    NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,7 +45,9 @@ public class EditCommentFragment extends Fragment {
         commentEditText.setText(content.getContent());
         Button commentButton = view.findViewById(R.id.edit_comment_button);
         Button deleteButton = view.findViewById(R.id.edit_comment_delete_button);
-        CommentViewModel commentViewModel = new ViewModelProvider(this.getActivity()).get(CommentViewModel.class);
+
+        commentViewModel = new ViewModelProvider(this.getActivity()).get(CommentViewModel.class);
+        navController = Navigation.findNavController(view);
 
         commentButton.setOnClickListener(view1-> {
             String commentValue = commentEditText.getText().toString();
@@ -51,9 +57,38 @@ public class EditCommentFragment extends Fragment {
             }
             content.setContent(commentValue);
             commentViewModel.updateComment(content);
-            NavController navController = Navigation.findNavController(view);
+
             navController.popBackStack();
         });
+
+
+
+        deleteButton.setOnClickListener(view1 -> {
+            AlertDialog dialog = this.getDeleteDialog(content);
+            dialog.show();
+        });
+    }
+
+    private AlertDialog getDeleteDialog(CommentData content) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.requireActivity());
+        builder.setMessage("Setelah di hapus, komentar tidak dapat di kembalikan lagi")
+                .setTitle("Hapus Komentar?")
+                .setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        commentViewModel.deleteComment(content);
+                        navController.popBackStack();
+                    }
+                })
+                .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        return dialog;
     }
 
 }
